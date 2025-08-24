@@ -4,3 +4,7 @@ Author: Thiago Waib "JJ" Castello Branco
 Description: Água
 Version: 1.0
 */
+
+#map {
+    height:  180px;
+}

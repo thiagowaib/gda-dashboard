@@ -16,5 +16,44 @@
 </head>
 <body>
     <div id="map"></div>
+
+    <?php 
+        $mediaPath = null;
+        $args = array(
+            'post_type' => 'attachment',
+            'numberposts' => -1,
+            'post_status' => null,
+            'post_parent' => null, // any parent
+            ); 
+        $attachments = get_posts($args);
+        if ($attachments) {
+            foreach ($attachments as $attachment) {
+                setup_postdata($attachment);
+                $mediaPath = get_attached_file($attachment->ID);
+                if(strpos(strtoupper($mediaPath), "CSV") !== FALSE) {
+                    break;
+                } else {
+                    $mediaPath = null;
+                    continue;
+                }
+            }
+        }
+
+        if($mediaPath !== null) {
+            $file     = fopen($mediaPath, "r");
+            $i = 0;
+            while (($line = fgetcsv($file)) !== FALSE) {
+                // Line #0 = HEADER
+                // Line #1 ... #n = DATA 
+                // array: column order => data
+                print_r($line);
+                echo "<br>";
+                $i ++;
+            }
+
+            fclose($file);
+        }
+    ?>
 </body>
 </html>
+<!-- http://localhost/gda-dashboard/wp-content/uploads/2025/08/TESTES-GDA-Pagina1.csv -->

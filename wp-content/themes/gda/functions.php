@@ -1,7 +1,30 @@
 <?php
-
+class FileSystem {
+    public static function getUpload() {
+        $uploadPath = null;
+        $args = array(
+            'post_type' => 'attachment',
+            'numberposts' => -1,
+            'post_status' => null,
+            'post_parent' => null, // any parent
+            ); 
+        $attachments = get_posts($args);
+        if ($attachments) {
+            foreach ($attachments as $attachment) {
+                setup_postdata($attachment);
+                $uploadPath = get_attached_file($attachment->ID);
+                if(strpos(strtoupper($uploadPath), "CSV") !== FALSE) {
+                    break;
+                } else {
+                    $uploadPath = null;
+                    continue;
+                }
+            }
+        }
+        return $uploadPath;
+    }
+}
 class Util {
-
     public static function test() {
         return 'Hello World';
     }

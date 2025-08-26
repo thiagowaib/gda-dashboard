@@ -11,46 +11,20 @@
      crossorigin=""></script>
 
     <link rel="stylesheet" href="<?= get_stylesheet_directory_uri(); ?>/style.css"/>
-    <script src="<?= get_template_directory_uri(); ?>/script.js" defer></script>
+    <script src="<?= get_template_directory_uri(); ?>/script.js" type="module" defer></script>
     <title><?= bloginfo('description'); ?></title>
 </head>
 <body>
     <div id="map"></div>
 
     <?php 
-        $mediaPath = null;
-        $args = array(
-            'post_type' => 'attachment',
-            'numberposts' => -1,
-            'post_status' => null,
-            'post_parent' => null, // any parent
-            ); 
-        $attachments = get_posts($args);
-        if ($attachments) {
-            foreach ($attachments as $attachment) {
-                setup_postdata($attachment);
-                $mediaPath = get_attached_file($attachment->ID);
-                if(strpos(strtoupper($mediaPath), "CSV") !== FALSE) {
-                    break;
-                } else {
-                    $mediaPath = null;
-                    continue;
-                }
+        $uploadPath = FileSystem::getUpload();
+        if($uploadPath !== null) {
+            $file = fopen($uploadPath, "r");
+            for($i = 0; ($line = fgetcsv($file)) !== FALSE; $i++) {
+                if($i===0) continue;
+                echo Medida::newFromArray($line)->toHTMLDocument();
             }
-        }
-
-        if($mediaPath !== null) {
-            $file     = fopen($mediaPath, "r");
-            $i = 0;
-            while (($line = fgetcsv($file)) !== FALSE && ++$i) {
-                if($i === 1) continue;
-                // Line #0 = HEADER
-                // Line #1 ... #n = DATA 
-                // array: column order => data
-                $m = Medida::newFromArray($line);
-                echo $m->toHTMLDocument();
-            }
-
             fclose($file);
         }
     ?>

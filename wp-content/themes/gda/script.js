@@ -1,40 +1,13 @@
-const Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-    maxZoom: 17,
-    minZoom: 14,
-    attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
-})
+import { Map } from "./scripts/map.js";
+import { Medida } from "./scripts/medida.js";
 
-const osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 17,
-    minZoom: 14,
-    attribution: '© OpenStreetMap'
-});
+const map = new Map();
 
-const map = L.map('map', {
-    center: [-19.72806, -50.19556],
-    zoom: 15,
-    layers: [Esri_WorldImagery, osm]
-});
+map.initLayers();
 
-const layerControl = L.control.layers({
-    "Visão de Satélite": Esri_WorldImagery,
-    "Visão de Mapa": osm,
-}).addTo(map);
-
-const obj = document.getElementsByClassName('leaflet-control-layers-selector')[0];
-obj.parentElement.click();
-
-
-const medidas = document.getElementsByClassName('medida-item');
-for(let i = 0; i<medidas.length; i++) {
-    let medida = medidas[i];
-    console.log({
-        ponto: medida.getAttribute('ponto'),
-        latitude: medida.getAttribute('latitude'),
-        longitude: medida.getAttribute('longitude'),
-        data: medida.getAttribute('data'),
-        odor: medida.getAttribute('odor'),
-        oleosGraxas: medida.getAttribute('oleosGraxas'),
-        materiaisFlutuantes: medida.getAttribute('materiaisFlutuantes')
-    });
-}
+const medidas = Medida.getMedidasFromDOM();
+map.addMarker(
+    medidas[0].latitude,
+    medidas[0].longitude,
+    `<b>${medidas[0].ponto}</b>`
+);

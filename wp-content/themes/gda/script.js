@@ -23,3 +23,18 @@ const layerControl = L.control.layers({
 
 const obj = document.getElementsByClassName('leaflet-control-layers-selector')[0];
 obj.parentElement.click();
+
+
+const medidas = document.getElementsByClassName('medida-item');
+for(let i = 0; i<medidas.length; i++) {
+    let medida = medidas[i];
+    console.log({
+        ponto: medida.getAttribute('ponto'),
+        latitude: medida.getAttribute('latitude'),
+        longitude: medida.getAttribute('longitude'),
+        data: medida.getAttribute('data'),
+        odor: medida.getAttribute('odor'),
+        oleosGraxas: medida.getAttribute('oleosGraxas'),
+        materiaisFlutuantes: medida.getAttribute('materiaisFlutuantes')
+    });
+}

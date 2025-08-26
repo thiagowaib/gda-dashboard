@@ -42,13 +42,13 @@
         if($mediaPath !== null) {
             $file     = fopen($mediaPath, "r");
             $i = 0;
-            while (($line = fgetcsv($file)) !== FALSE) {
+            while (($line = fgetcsv($file)) !== FALSE && ++$i) {
+                if($i === 1) continue;
                 // Line #0 = HEADER
                 // Line #1 ... #n = DATA 
                 // array: column order => data
-                print_r($line);
-                echo "<br>";
-                $i ++;
+                $m = Medida::newFromArray($line);
+                echo $m->toHTMLDocument();
             }
 
             fclose($file);

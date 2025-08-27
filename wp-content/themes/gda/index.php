@@ -10,11 +10,27 @@
      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
      crossorigin=""></script>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="<?= get_stylesheet_directory_uri(); ?>/styles/reset.css"/>
+    <link rel="stylesheet" href="<?= get_stylesheet_directory_uri(); ?>/styles/fonts.css"/>
     <link rel="stylesheet" href="<?= get_stylesheet_directory_uri(); ?>/style.css"/>
+    
     <script src="<?= get_template_directory_uri(); ?>/script.js" type="module" defer></script>
+    
     <title><?= bloginfo('description'); ?></title>
 </head>
 <body>
+    <header>
+        <div class="major-mono">
+            <h2>projeto</h2>
+            <h1>cuidadores das <span>Á</span>guas</h1>
+        </div>
+    </header>
     <div id="map"></div>
 
     <?php 

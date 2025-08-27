@@ -9,6 +9,9 @@ export class Medida {
 
     constructor() { }
 
+    /**
+     * @returns {Medida}
+     */
     static newFromDTO(dto) {
         const m = new Medida();
         m.ponto = dto.getAttribute('ponto'),
@@ -21,12 +24,63 @@ export class Medida {
         return m;
     }
 
+    /**
+     * @returns {Medida[]}
+     */
     static getMedidasFromDOM() {
         const medidas = [];
         const items = document.getElementsByClassName('medida-item');
         for(let i = 0; i < items.length; i++) {
             medidas.push(Medida.newFromDTO(items[i]));
         }
+        if(items != null && items.length > 0) {
+            items[0].parentElement.remove();
+        }
         return medidas;
     }
+
+    /**
+     * @param {Medida[]} arr
+     * @return {[{latitude: string, longitude: string, ponto: string, medidas: Medida[]}]}
+     */
+    static groupByLocation(arr) {
+        const medidas = {};
+        arr.forEach(m => {
+            if(m.ponto in medidas) {
+                medidas[m.ponto].medidas.push(m);
+            } else {
+                medidas[m.ponto] = {
+                    ponto: m.ponto,
+                    latitude: m.latitude,
+                    longitude: m.longitude,
+                    medidas: [m]
+                };
+            }
+        });
+
+        const medArray = [];
+        for(const [ponto, dados] of Object.entries(medidas)) {
+            dados.medidas.sort((a, b) => {
+                const dateA = a.data.split('/').reverse().join('-'); // Convert to "YYYY-MM-DD"
+                const dateB = b.data.split('/').reverse().join('-'); // Convert to "YYYY-MM-DD"
+                // return new Date(dateA) - new Date(dateB); // Asc
+                return new Date(dateB) - new Date(dateA); // Desc
+            })
+            medArray.push({
+                ponto: dados.ponto,
+                latitude: dados.latitude,
+                longitude: dados.longitude,
+                medidas: dados.medidas
+            })
+        }
+        return medArray;
+    }
 }
+/*
+{ponto: "a", latitude: ""}
+{
+    Ponto A: {
+        "2025-08-20": []
+    }
+}
+*/

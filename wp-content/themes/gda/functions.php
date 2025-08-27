@@ -88,18 +88,29 @@ class Medida {
         );
     }
 
+    private function hasRequiredData() {
+        return isset($this->ponto) && !empty($this->ponto)
+        && isset($this->latitude) && !empty($this->latitude)
+        && isset($this->longitude) && !empty($this->longitude)
+        && isset($this->data) && !empty($this->data);
+    }
+
     public function toHTMLDocument() {
-        return '<div 
-            class="medida-item"
-            ponto="'.$this->ponto.'"
-            latitude="'.$this->latitude.'"
-            longitude="'.$this->longitude.'"
-            data="'.$this->data.'"
-            odor="'.$this->odor.'"
-            oleosGraxas="'.$this->oleosGraxas.'"
-            materiaisFlutuantes="'.$this->materiaisFlutuantes.'"
-        ></div>
-        ';
+        if($this->hasRequiredData()) {
+            return '<div 
+                class="medida-item"
+                style="display:none;"
+                ponto="'.$this->ponto.'"
+                latitude="'.$this->latitude.'"
+                longitude="'.$this->longitude.'"
+                data="'.$this->data.'"
+                odor="'.$this->odor.'"
+                oleosGraxas="'.$this->oleosGraxas.'"
+                materiaisFlutuantes="'.$this->materiaisFlutuantes.'"
+            ></div>';
+        } else {
+            return '';
+        }
     }
 
 

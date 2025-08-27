@@ -20,12 +20,14 @@
     <?php 
         $uploadPath = FileSystem::getUpload();
         if($uploadPath !== null) {
+            echo '<div style="display:none;">';
             $file = fopen($uploadPath, "r");
             for($i = 0; ($line = fgetcsv($file)) !== FALSE; $i++) {
                 if($i===0) continue;
                 echo Medida::newFromArray($line)->toHTMLDocument();
             }
             fclose($file);
+            echo '</div>';
         }
     ?>
 </body>

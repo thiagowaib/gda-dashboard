@@ -10,6 +10,14 @@ Version: 1.0
     width:   100vw;
 }
 
+#map .leaflet-tile-pane{
+    filter: brightness(70%);
+}
+
+#map .leaflet-marker-icon {
+    filter: brightness(150%);
+}
+
 header {
     background: #000000;
 }
@@ -28,8 +36,4 @@ header div h2 {
 
 header div h1 {
     font-size: 24px;
-}
-
-header div h1 span {
-    color: #FF0000;  /* Triangulo Vermelho ? */
 }

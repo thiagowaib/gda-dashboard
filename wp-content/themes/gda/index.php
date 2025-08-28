@@ -28,7 +28,7 @@
     <header>
         <div class="major-mono">
             <h2>projeto</h2>
-            <h1>cuidadores das <span>Á</span>guas</h1>
+            <h1>cuidadores das Águas</h1>
         </div>
     </header>
     <div id="map"></div>

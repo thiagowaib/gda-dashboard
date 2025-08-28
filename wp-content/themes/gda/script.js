@@ -5,14 +5,15 @@ const map = new Map();
 
 map.initLayers();
 
-const medidas = Medida.groupByLocation(Medida.getMedidasFromDOM());
+const medidas = Medida.normalizeData(Medida.getMedidasFromDOM());
 
 console.log(medidas);
 
 medidas.forEach(m => {
-    map.addMarker(
+    const marker = map.addMarker(
         m.latitude,
         m.longitude,
         `<b>${m.ponto}</b>`
     )
+    marker.on('click', () => Medida.displayNormalizedData(m));
 })

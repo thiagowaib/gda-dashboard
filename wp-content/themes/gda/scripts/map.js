@@ -45,9 +45,16 @@ export class Map {
         return this.map;
     }
 
+    /**
+     * @param {number} latitude 
+     * @param {number} longitude 
+     * @param {string} description
+     * @return {marker} 
+     */
     addMarker(latitude, longitude, description) {
         const marker = L.marker([latitude, longitude], {icon: this.markerIcon});
         this.map.addLayer(marker);
         marker.bindPopup(`<b>${description}</b>`);
+        return marker;
     }
 }

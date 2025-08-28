@@ -1,3 +1,5 @@
+import { toggleData, isDataShown } from "./dom";
+
 export class Medida {
     ponto;
     latitude;
@@ -43,7 +45,7 @@ export class Medida {
      * @param {Medida[]} arr
      * @return {[{latitude: string, longitude: string, ponto: string, medidas: Medida[]}]}
      */
-    static groupByLocation(arr) {
+    static normalizeData(arr) {
         const medidas = {};
         arr.forEach(m => {
             if(m.ponto in medidas) {
@@ -75,12 +77,59 @@ export class Medida {
         }
         return medArray;
     }
-}
-/*
-{ponto: "a", latitude: ""}
-{
-    Ponto A: {
-        "2025-08-20": []
+
+    /**
+     * 
+     * @param {{latitude: string, longitude: string, ponto: string, medidas: Medida[]}} dadosPonto 
+     */
+    static displayNormalizedData(dadosPonto) {
+        const anchor = document.getElementById('table-anchor');
+        anchor.innerHTML = '';
+        
+        toggleData(dadosPonto.medidas[0]);
+        if(!isDataShown()) return; 
+
+        dadosPonto.medidas.forEach((medida, i) => {
+            const table = medida.toHTMLTable();
+            table.classList.add("data-table")
+            if(i === 0) {
+                table.classList.add("visible")
+            }
+            anchor.appendChild(table);
+        });
+        
+    }
+
+    toHTMLTable() {
+        const headers = `
+            <tr class="table-header-row">
+                <th>Parâmetro</th>
+                <th>Padrão Legal</th>
+                <th>Valor</th>
+            </tr>
+        `
+
+        const data = `
+            <tr class="data-table-row">
+                <td class="data-table-label">Odor</td>
+                <td class="data-table-standard">Ausência</td>
+                <td class="data-table-measurement">${this.odor}</td>
+            </tr>
+            <tr class="data-table-row">
+                <td class="data-table-label">Óleos e Graxas</td>
+                <td class="data-table-standard">Ausência</td>
+                <td class="data-table-measurement">${this.oleosGraxas}</td>
+            </tr>
+            <tr class="data-table-row">
+                <td class="data-table-label">Materiais Flutuantes</td>
+                <td class="data-table-standard">Ausência</td>
+                <td class="data-table-measurement">${this.materiaisFlutuantes}</td>
+            </tr>
+        `
+
+        const table = document.createElement("table");
+        table.innerHTML = `${headers}${data}`;
+
+        return table;
     }
 }
-*/

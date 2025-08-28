@@ -25,13 +25,29 @@
     <title><?= bloginfo('description'); ?></title>
 </head>
 <body>
-    <header>
-        <div class="major-mono">
-            <h2>projeto</h2>
-            <h1>cuidadores das Águas</h1>
+    <section id="map-section">
+        <header>
+            <div class="major-mono">
+                <h2>projeto</h2>
+                <h1>cuidadores das Águas</h1>
+            </div>
+        </header>
+
+        <div id="map"></div>
+        <footer>
+
+        </footer>
+    </section>
+
+    <section id="data-section">
+        <h1 id="data-point-description"></h1>
+        <h2 id="data-date-description"></h2>
+        <div id="table-anchor">
+            
         </div>
-    </header>
-    <div id="map"></div>
+    </section>
+
+    
 
     <?php 
         $uploadPath = FileSystem::getUpload();

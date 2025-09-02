@@ -40,10 +40,16 @@
     </section>
 
     <section id="data-section">
+        <button id="btn-close-data-section">x</button>
         <h1 id="data-point-description"></h1>
-        <h2 id="data-date-description"></h2>
-        <div id="table-anchor">
-            
+        <div>
+            <h2 id="data-date-description"></h2>
+            <a id="data-previous">&#10094;</a>
+            <div id="data-table-anchor"></div>
+            <a id="data-next">&#10095;</a>
+            <div class="data-dot-container">
+                <!-- <span class="carrousel-dot"></span> -->
+            </div>
         </div>
     </section>
 

@@ -1,13 +1,14 @@
 import { Map } from "./scripts/map.js";
 import { Medida } from "./scripts/medida.js";
+import { initBasicDOM, displayDataTables } from "./scripts/dom.js";
 
 const map = new Map();
 
 map.initLayers();
 
-const medidas = Medida.normalizeData(Medida.getMedidasFromDOM());
+initBasicDOM();
 
-console.log(medidas);
+const medidas = Medida.normalizeData(Medida.getMedidasFromDOM());
 
 medidas.forEach(m => {
     const marker = map.addMarker(
@@ -15,5 +16,5 @@ medidas.forEach(m => {
         m.longitude,
         `<b>${m.ponto}</b>`
     )
-    marker.on('click', () => Medida.displayNormalizedData(m));
+    marker.on('click', () => displayDataTables(m));
 })

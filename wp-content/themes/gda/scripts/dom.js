@@ -1,10 +1,13 @@
 import { Medida } from "./medida";
 
-const tableAnchor   = document.getElementById('table-anchor');
 const mapSection    = document.getElementById('map-section');
 const dataSection   = document.getElementById('data-section');
+const dataAnchor    = document.getElementById('data-table-anchor');
 const dataPointDesc = document.getElementById('data-point-description');
 const dataDateDesc  = document.getElementById('data-date-description');
+const btnCloseDataSection = document.getElementById('btn-close-data-section');
+const btnDataPrevious     = document.getElementById('data-previous');
+const btnDataNext         = document.getElementById('data-next');
 
 /**
  * @param {Medida} medida 
@@ -23,6 +26,55 @@ function hideData() {
 
     dataPointDesc.innerHTML = '';
     dataDateDesc.innerHTML  = '';
+    dataAnchor.innerHTML = '';
+}
+
+function cycleDataPrevious() {
+    const tables = dataAnchor.children;
+    let actualIndex;
+    for(let i = 0; i < tables.length; i++) {
+        if(tables[i].classList.contains("visible")) {
+            actualIndex = i;
+            break;
+        }
+    }
+
+    if(actualIndex >= (tables.length - 1)) {
+        return;
+    }
+
+    for(let i = 0; i < tables.length; i++) {
+        if(i === (actualIndex + 1)) {
+            tables[i].classList.add("visible");
+            dataDateDesc.innerHTML = tables[i].getAttribute("date");
+        } else {
+            tables[i].classList.remove("visible");
+        }
+    }
+}
+
+function cycleDataNext() {
+    const tables = dataAnchor.children;
+    let actualIndex;
+    for(let i = 0; i < tables.length; i++) {
+        if(tables[i].classList.contains("visible")) {
+            actualIndex = i;
+            break;
+        }
+    }
+
+    if(actualIndex <= 0) {
+        return;
+    }
+
+    for(let i = 0; i < tables.length; i++) {
+        if(i === (actualIndex - 1)) {
+            tables[i].classList.add("visible");
+            dataDateDesc.innerHTML = tables[i].getAttribute("date");
+        } else {
+            tables[i].classList.remove("visible");
+        }
+    }
 }
 
 /**
@@ -41,4 +93,31 @@ export function toggleData(medida) {
 
 export function isDataShown() {
     return dataSection.classList.contains("data-shown");
+}
+
+export function initBasicDOM() {
+    btnCloseDataSection.addEventListener('click', hideData);
+    btnDataPrevious.addEventListener('click', cycleDataPrevious);
+    btnDataNext.addEventListener('click', cycleDataNext);
+}
+
+/**
+ * @param {{latitude: string;longitude: string;ponto: string;medidas: Medida[]}} m 
+ */
+export function displayDataTables(m) {
+    const anchor = document.getElementById('data-table-anchor');
+    anchor.innerHTML = '';
+    
+    toggleData(m.medidas[0]);
+    if(!isDataShown()) return; 
+
+    m.medidas.forEach((medida, i) => {
+        const table = medida.toHTMLTable();
+        table.classList.add("data-table")
+        if(i === 0) {
+            table.classList.add("visible")
+        }
+        table.setAttribute("date", medida.data);
+        anchor.appendChild(table);
+    });
 }

@@ -70,3 +70,11 @@ header div h2 {
 header div h1 {
     font-size: 24px;
 }
+
+.data-table {
+    display: none;
+}
+
+.data-table.visible {
+    display: inherit;
+}

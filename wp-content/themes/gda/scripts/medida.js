@@ -1,5 +1,3 @@
-import { toggleData, isDataShown } from "./dom";
-
 export class Medida {
     ponto;
     latitude;
@@ -76,28 +74,6 @@ export class Medida {
             })
         }
         return medArray;
-    }
-
-    /**
-     * 
-     * @param {{latitude: string, longitude: string, ponto: string, medidas: Medida[]}} dadosPonto 
-     */
-    static displayNormalizedData(dadosPonto) {
-        const anchor = document.getElementById('table-anchor');
-        anchor.innerHTML = '';
-        
-        toggleData(dadosPonto.medidas[0]);
-        if(!isDataShown()) return; 
-
-        dadosPonto.medidas.forEach((medida, i) => {
-            const table = medida.toHTMLTable();
-            table.classList.add("data-table")
-            if(i === 0) {
-                table.classList.add("visible")
-            }
-            anchor.appendChild(table);
-        });
-        
     }
 
     toHTMLTable() {

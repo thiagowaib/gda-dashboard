@@ -19,6 +19,8 @@
     <link rel="stylesheet" href="<?= get_stylesheet_directory_uri(); ?>/styles/reset.css"/>
     <link rel="stylesheet" href="<?= get_stylesheet_directory_uri(); ?>/styles/fonts.css"/>
     <link rel="stylesheet" href="<?= get_stylesheet_directory_uri(); ?>/style.css"/>
+    <link rel="stylesheet" href="<?= get_stylesheet_directory_uri(); ?>/styles/map.css"/>
+    <link rel="stylesheet" href="<?= get_stylesheet_directory_uri(); ?>/styles/data.css"/>
     
     <script src="<?= get_template_directory_uri(); ?>/script.js" type="module" defer></script>
     
@@ -39,16 +41,23 @@
         </footer>
     </section>
 
-    <section id="data-section">
+    <section id="data-section" class="montserrat">
+        <span id="data-section-cta">
+            Clique em um ponto de coleta para ver os dados de análise
+        </span>
+        
+
         <button id="btn-close-data-section">x</button>
         <h1 id="data-point-description"></h1>
-        <div>
+        <div id="data-mutable-container">
             <h2 id="data-date-description"></h2>
-            <a id="data-previous">&#10094;</a>
-            <div id="data-table-anchor"></div>
-            <a id="data-next">&#10095;</a>
+            <div>
+                <a id="data-previous">&#10094;</a>
+                <div id="data-table-anchor"></div>
+                <a id="data-next">&#10095;</a>
+            </div>
             <div class="data-dot-container">
-                <!-- <span class="carrousel-dot"></span> -->
+            <!-- <span class="carrousel-dot"></span> -->
             </div>
         </div>
     </section>

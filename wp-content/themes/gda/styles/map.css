@@ -1,0 +1,36 @@
+#map-section {
+    position: absolute;
+    z-index: 1;
+    width: 80vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    transition: all .2s;
+}
+
+#map-section.data-shown{
+    width: 40vw;
+}
+
+#map {
+    height:  100%;
+    width:   100%;
+}
+
+#map .leaflet-tile-pane{
+    filter: brightness(70%);
+}
+
+#map .leaflet-marker-icon {
+    filter: brightness(150%);
+}
+
+.leaflet-control-attribution {
+    display: none;
+}
+
+.leaflet-control-layers,
+.leaflet-control-layers-selector,
+.leaflet-control-layers-base label span {
+    cursor: pointer;
+}

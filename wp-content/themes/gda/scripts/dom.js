@@ -16,8 +16,12 @@ function showData(medida) {
     mapSection.classList.add("data-shown");
     dataSection.classList.add("data-shown");
 
-    dataPointDesc.innerHTML = medida.ponto;
-    dataDateDesc.innerHTML  = medida.data;
+    if(medida.ponto.toUpperCase().includes("PONTO")) {
+        dataPointDesc.innerHTML = medida.ponto;
+    } else {
+        dataPointDesc.innerHTML = "Ponto de Coleta " + medida.ponto.toUpperCase();
+    }
+    dataDateDesc.innerHTML  = "Medição feita em " + medida.data;
 }
 
 function hideData() {

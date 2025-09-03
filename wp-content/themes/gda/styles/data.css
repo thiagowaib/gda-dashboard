@@ -1,0 +1,130 @@
+#data-section {
+    position: absolute;
+    z-index: 10;
+    right: 0;
+
+    box-shadow: -12px 0 12px rgba(0,0,0,0.4);
+    background-color: #F5F5F5;
+
+    width: 20vw;
+    height: 100vh;
+    transition: all .2s;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#data-section > * {
+    display: none;
+}
+
+#data-section #data-section-cta {
+    display: flex;
+    padding: 16px;
+    font-size: 14px;
+    text-align: center;
+    color: #A9A9A9;
+}
+
+#data-section.data-shown {
+    width: 60vw;
+}
+
+#data-section.data-shown > * {
+    display: inherit;
+}
+
+#data-section.data-shown #data-section-cta {
+    display: none;
+}
+
+#data-section.data-shown #btn-close-data-section {
+    background-color: transparent;
+    color: #A9A9A9;
+    outline: none;
+    border: none;
+    font-size: 36px;
+    font-weight: bold;
+    cursor: pointer;
+    /* align-self: flex-start;
+    justify-self: flex-start; */
+    position: absolute;
+    left: 12px;
+    top: 4px;
+    padding: 4px;
+    transition: all .2s;
+}
+#data-section.data-shown #btn-close-data-section:hover {
+    color: #696969;
+}
+
+#data-section.data-shown #data-point-description {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 36px;
+}
+
+#data-section.data-shown #data-mutable-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+#data-section.data-shown #data-date-description {
+    margin-bottom: 24px;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 36px;
+
+}
+
+#data-section.data-shown #data-mutable-container div {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+#data-section.data-shown #data-previous,
+#data-section.data-shown #data-next {
+    cursor: pointer;
+    padding: 12px;
+    margin: 12px 0;
+    border-radius: 100%;
+    transition: all .2s;
+}
+
+#data-section.data-shown #data-previous:hover,
+#data-section.data-shown #data-next:hover {
+    background-color: #C9C9C9;
+}
+
+#data-section.data-shown #data-previous {
+}
+
+.data-table {
+    display: none;
+}
+
+.data-table tr {
+}
+
+.data-table th {
+
+}
+
+.data-table td {
+
+}
+
+.data-table.visible {
+    display: inherit;
+}
+
+#data-section.data-shown #data-next {
+
+}
+

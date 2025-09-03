@@ -11,45 +11,6 @@ body {
     height: 100vh;
 }
 
-#map-section {
-    width: 80vw;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    transition: all .2s;
-}
-
-#map-section.data-shown{
-    width: 40vw;
-}
-
-#data-section {
-    width: 20vw;
-    height: 100vh;
-    transition: all .2s;
-}
-
-#data-section.data-shown {
-    width: 60vw;
-}
-
-#map {
-    height:  100%;
-    width:   100%;
-}
-
-#map .leaflet-tile-pane{
-    filter: brightness(70%);
-}
-
-#map .leaflet-marker-icon {
-    filter: brightness(150%);
-}
-
-.leaflet-control-attribution {
-    display: none;
-}
-
 header {
     width: 100%;
     background: #000000;
@@ -71,10 +32,3 @@ header div h1 {
     font-size: 24px;
 }
 
-.data-table {
-    display: none;
-}
-
-.data-table.visible {
-    display: inherit;
-}

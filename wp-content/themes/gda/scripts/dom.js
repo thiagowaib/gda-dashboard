@@ -50,7 +50,7 @@ function cycleDataPrevious() {
     for(let i = 0; i < tables.length; i++) {
         if(i === (actualIndex + 1)) {
             tables[i].classList.add("visible");
-            dataDateDesc.innerHTML = tables[i].getAttribute("date");
+            dataDateDesc.innerHTML = "Medição feita em " + tables[i].getAttribute("date");
         } else {
             tables[i].classList.remove("visible");
         }
@@ -74,7 +74,7 @@ function cycleDataNext() {
     for(let i = 0; i < tables.length; i++) {
         if(i === (actualIndex - 1)) {
             tables[i].classList.add("visible");
-            dataDateDesc.innerHTML = tables[i].getAttribute("date");
+            dataDateDesc.innerHTML = "Medição feita em " + tables[i].getAttribute("date");
         } else {
             tables[i].classList.remove("visible");
         }

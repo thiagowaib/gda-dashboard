@@ -79,9 +79,9 @@ export class Medida {
     toHTMLTable() {
         const headers = `
             <tr class="table-header-row">
-                <th>Parâmetro</th>
-                <th>Padrão Legal</th>
-                <th>Valor</th>
+                <th class="data-table-label">Parâmetro</th>
+                <th class="data-table-standard">Padrão Legal</th>
+                <th class="data-table-measurement">Valor</th>
             </tr>
         `
 
@@ -105,7 +105,6 @@ export class Medida {
 
         const table = document.createElement("table");
         table.innerHTML = `${headers}${data}`;
-
         return table;
     }
 }

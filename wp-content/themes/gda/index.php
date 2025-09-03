@@ -52,9 +52,9 @@
         <div id="data-mutable-container">
             <h2 id="data-date-description"></h2>
             <div>
-                <a id="data-previous">&#10094;</a>
+                <a id="data-previous">&#10094; Anterior</a>
                 <div id="data-table-anchor"></div>
-                <a id="data-next">&#10095;</a>
+                <a id="data-next">Próximo &#10095;</a>
             </div>
             <div class="data-dot-container">
             <!-- <span class="carrousel-dot"></span> -->

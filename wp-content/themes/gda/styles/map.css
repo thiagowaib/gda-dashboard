@@ -10,6 +10,7 @@
 
 #map-section.data-shown{
     width: 40vw;
+    min-width: calc(100vw - 768px);
 }
 
 #map {

@@ -38,6 +38,16 @@ class Medida {
     private $odor;
     private $oleosGraxas;
     private $materiaisFlutuantes;
+    private $residuosSolidos;
+    private $turbidez;
+    private $ph;
+    private $oxigenio;
+    private $amonia;
+    private $nitrito;
+    private $nitrato;
+    private $fosfato;
+    private $coliformes;
+    private $eColi;
 
     public function __construct(
         $ponto,
@@ -46,7 +56,17 @@ class Medida {
         $data,
         $odor,
         $oleosGraxas,
-        $materiaisFlutuantes
+        $materiaisFlutuantes,
+        $residuosSolidos,
+        $turbidez,
+        $ph,
+        $oxigenio,
+        $amonia,
+        $nitrito,
+        $nitrato,
+        $fosfato,
+        $coliformes,
+        $eColi
     ) {
         $this->ponto = $ponto;
         $this->latitude = $latitude;
@@ -55,6 +75,16 @@ class Medida {
         $this->odor = $odor;
         $this->oleosGraxas = $oleosGraxas;
         $this->materiaisFlutuantes = $materiaisFlutuantes;
+        $this->residuosSolidos = $residuosSolidos;
+        $this->turbidez = $turbidez;
+        $this->ph = $ph;
+        $this->oxigenio = $oxigenio;
+        $this->amonia = $amonia;
+        $this->nitrito = $nitrito;
+        $this->nitrato = $nitrato;
+        $this->fosfato = $fosfato;
+        $this->coliformes = $coliformes;
+        $this->eColi = $eColi;
     }
 
     public static function newFromArray($array) {
@@ -76,6 +106,49 @@ class Medida {
         $odor = $array[4];
         $oleosGraxas = $array[5];
         $materiaisFlutuantes = $array[6];
+
+        $residuosSolidos = $array[7];
+        $turbidez = $array[8];
+        $ph = number_format(
+            doubleval(
+                str_replace(',', '.',$array[9])
+            ), 2
+        );
+        $oxigenio = number_format(
+            doubleval(
+                str_replace(',', '.',$array[10])
+            ), 2
+        );
+        $amonia = number_format(
+            doubleval(
+                str_replace(',', '.',$array[11])
+            ), 2
+        );
+        $nitrito = number_format(
+            doubleval(
+                str_replace(',', '.',$array[12])
+            ), 2
+        );
+        $nitrato = number_format(
+            doubleval(
+                str_replace(',', '.',$array[13])
+            ), 2
+        );
+        $fosfato = number_format(
+            doubleval(
+                str_replace(',', '.',$array[14])
+            ), 2
+        );
+        $coliformes = number_format(
+            doubleval(
+                str_replace(',', '.',$array[15])
+            ), 0, '.', ''
+        );
+        $eColi = number_format(
+            doubleval(
+                str_replace(',', '.',$array[16])
+            ), 0, '.', ''
+        );
         
         return new Medida(
             $ponto,
@@ -84,7 +157,17 @@ class Medida {
             $data,
             $odor,
             $oleosGraxas,
-            $materiaisFlutuantes
+            $materiaisFlutuantes,
+            $residuosSolidos,
+            $turbidez,
+            $ph,
+            $oxigenio,
+            $amonia,
+            $nitrito,
+            $nitrato,
+            $fosfato,
+            $coliformes,
+            $eColi
         );
     }
 
@@ -107,6 +190,16 @@ class Medida {
                 odor="'.$this->odor.'"
                 oleosGraxas="'.$this->oleosGraxas.'"
                 materiaisFlutuantes="'.$this->materiaisFlutuantes.'"
+                residuosSolidos="'.$this->residuosSolidos.'"
+                turbidez="'.$this->turbidez.'"
+                ph="'.$this->ph.'"
+                oxigenio="'.$this->oxigenio.'"
+                amonia="'.$this->amonia.'"
+                nitrito="'.$this->nitrito.'"
+                nitrato="'.$this->nitrato.'"
+                fosfato="'.$this->fosfato.'"
+                coliformes="'.$this->coliformes.'"
+                eColi="'.$this->eColi.'"
             ></div>';
         } else {
             return '';

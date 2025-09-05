@@ -161,6 +161,19 @@
     font-weight: bold;
 }
 
+td.data-table-measurement {
+    background-color: #CCCCCC;
+    text-transform: capitalize;
+}
+
+.data-table-measurement.valid {
+    background-color: #CCFFCC;
+}
+
+.data-table-measurement.invalid {
+    background-color: #FFCCCC;
+}
+
 
 
 .data-table.visible {

@@ -16,5 +16,11 @@ medidas.forEach(m => {
         m.longitude,
         `<b>${m.ponto}</b>`
     )
-    marker.on('click', () => displayDataTables(m));
+    marker.on('click', () => {
+        displayDataTables(m)
+        // setTimeout(() => {
+            // map.getMap().invalidateSize();
+            map.getMap().panTo([m.latitude, m.longitude])
+        // }, 200);
+    });
 })

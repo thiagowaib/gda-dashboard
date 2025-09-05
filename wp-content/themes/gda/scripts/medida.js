@@ -1,11 +1,38 @@
 export class Medida {
+    /** @property {string} */
     ponto;
+    /** @property {number} */
     latitude;
+    /** @property {number} */
     longitude;
+    /** @property {string} */
     data;
+    /** @property {string} */
     odor;
+    /** @property {string} */
     oleosGraxas;
+    /** @property {string} */
     materiaisFlutuantes;
+    /** @property {string} */
+    residuosSolidos;
+    /** @property {string} */
+    turbidez;
+    /** @property {number} */
+    ph;
+    /** @property {number} */
+    oxigenio;
+    /** @property {number} */
+    amonia;
+    /** @property {number} */
+    nitrito;
+    /** @property {number} */
+    nitrato;
+    /** @property {number} */
+    fosfato;
+    /** @property {number} */
+    coliformes;
+    /** @property {number} */
+    eColi;
 
     constructor() { }
 
@@ -15,12 +42,22 @@ export class Medida {
     static newFromDTO(dto) {
         const m = new Medida();
         m.ponto = dto.getAttribute('ponto'),
-        m.latitude = dto.getAttribute('latitude'),
-        m.longitude = dto.getAttribute('longitude'),
+        m.latitude = Number.parseFloat(dto.getAttribute('latitude')),
+        m.longitude = Number.parseFloat(dto.getAttribute('longitude')),
         m.data = dto.getAttribute('data'),
         m.odor = dto.getAttribute('odor'),
         m.oleosGraxas = dto.getAttribute('oleosGraxas'),
         m.materiaisFlutuantes = dto.getAttribute('materiaisFlutuantes')
+        m.residuosSolidos = dto.getAttribute('residuosSolidos');
+        m.turbidez = dto.getAttribute('turbidez');
+        m.ph = Number.parseFloat(dto.getAttribute('ph'));
+        m.oxigenio = Number.parseFloat(dto.getAttribute('oxigenio'));
+        m.amonia = Number.parseFloat(dto.getAttribute('amonia'));
+        m.nitrito = Number.parseFloat(dto.getAttribute('nitrito'));
+        m.nitrato = Number.parseFloat(dto.getAttribute('nitrato'));
+        m.fosfato = Number.parseFloat(dto.getAttribute('fosfato'));
+        m.coliformes = Number.parseFloat(dto.getAttribute('coliformes'));
+        m.eColi = Number.parseFloat(dto.getAttribute('eColi'));
         return m;
     }
 
@@ -76,35 +113,197 @@ export class Medida {
         return medArray;
     }
 
-    toHTMLTable() {
-        const headers = `
-            <tr class="table-header-row">
-                <th class="data-table-label">Parâmetro</th>
-                <th class="data-table-standard">Padrão Legal</th>
-                <th class="data-table-measurement">Valor</th>
-            </tr>
-        `
-
-        const data = `
-            <tr class="data-table-row">
-                <td class="data-table-label">Odor</td>
-                <td class="data-table-standard">Ausência</td>
-                <td class="data-table-measurement">${this.odor}</td>
-            </tr>
-            <tr class="data-table-row">
-                <td class="data-table-label">Óleos e Graxas</td>
-                <td class="data-table-standard">Ausência</td>
-                <td class="data-table-measurement">${this.oleosGraxas}</td>
-            </tr>
-            <tr class="data-table-row">
-                <td class="data-table-label">Materiais Flutuantes</td>
-                <td class="data-table-standard">Ausência</td>
-                <td class="data-table-measurement">${this.materiaisFlutuantes}</td>
-            </tr>
-        `
-
-        const table = document.createElement("table");
-        table.innerHTML = `${headers}${data}`;
-        return table;
+    /**
+     * @param {string|null} str 
+     * @param {string} validSubstring 
+     * @return {'valid'|'invalid'|''} 
+     */
+    #getClassificationStringIncludes(str, validSubstring) {
+        if(str != null && str.trim().length > 0) {
+            return str.trim().toUpperCase().includes(validSubstring.toUpperCase()) ? 'valid' : 'invalid';
+        } else {
+            return '';
+        }
     }
+
+    /**
+     * @param {number|null} number 
+     * @param {number|null} lowerLimit 
+     * @param {number|null} upperLimit
+     * @return {'valid'|'invalid'|''} 
+     */
+    #getClassificationNumberLimit(number, lowerLimit = null, upperLimit = null) {
+        if(number == null ||  isNaN(number)) {
+            return '';
+        }
+
+        if(lowerLimit != null && upperLimit != null) {
+            return number >= lowerLimit && number <= upperLimit ? 'valid' : 'invalid';
+        } else if (lowerLimit != null) {
+            return number >= lowerLimit ? 'valid' : 'invalid';
+        } else if (upperLimit != null) {
+            return number <= upperLimit ? 'valid' : 'invalid';
+        } else {
+            return '';
+        }
+    }
+
+    getClassificationOdor() {
+        return this.#getClassificationStringIncludes(this.odor, 'AUS');
+    }
+
+    getClassificationOleosGraxas() {
+        return this.#getClassificationStringIncludes(this.oleosGraxas, 'AUS');
+    }
+
+    getClassificationMateriaisFlutuantes() {
+        return this.#getClassificationStringIncludes(this.materiaisFlutuantes, 'AUS');
+    }
+
+    getClassificationResiduosSolidos() {
+        return this.#getClassificationStringIncludes(this.residuosSolidos, 'AUS');
+    }
+
+    getClassificationTurbidez() {
+        return this.#getClassificationNumberLimit(this.turbidez, null, 100);
+    }
+
+    getClassificationPh() {
+        return this.#getClassificationNumberLimit(this.ph, 6, 9);
+    }
+
+    getClassificationOxigenio() {
+        return this.#getClassificationNumberLimit(this.oxigenio, 5, null);
+    }
+
+    getClassificationAmonia() {
+        return this.#getClassificationNumberLimit(this.amonia, null, 3.7);
+    }
+
+    getClassificationNitrito() {
+        return this.#getClassificationNumberLimit(this.nitrato, null, 1);
+    }
+
+    getClassificationNitrato() {
+        return this.#getClassificationNumberLimit(this.nitrato, null, 10);
+    }
+
+    getClassificationFosfato() {
+        return this.#getClassificationNumberLimit(this.fosfato, null, 0.1);
+    }
+
+    getClassificationColiformes() {
+        return this.#getClassificationNumberLimit(this.coliformes, null, 1000);
+    }
+
+    getClassificationEColi() {
+        return this.#getClassificationNumberLimit(this.eColi, null, 2000);
+    }
+
+    getOdor() {
+        return this.odor;
+    }
+
+    getOleosGraxas() {
+        return this.oleosGraxas;
+    }
+
+    getMateriaisFlutuantes() {
+        return this.materiaisFlutuantes;
+    }
+
+    getResiduosSolidos() {
+        return this.residuosSolidos;
+    }
+
+    getTurbidez() {
+        if(this.turbidez == null) {
+            return '-';
+        } else if (isNaN(this.turbidez)) {
+            return this.turbidez.trim();
+        } else {
+            return this.turbidez;
+        }
+    }
+
+    getPh() {
+        if(this.ph == null) {
+            return '-';
+        } else if (isNaN(this.ph)) {
+            return this.ph.trim();
+        } else {
+            return this.ph.toFixed(1).replace('.',',');
+        }
+    }
+
+    getOxigenio() {
+        if(this.oxigenio == null) {
+            return '-';
+        } else if (isNaN(this.oxigenio)) {
+            return this.oxigenio.trim();
+        } else {
+            return this.oxigenio.toFixed(2).replace('.',',');
+        }
+    }
+
+    getAmonia() {
+        if(this.amonia == null) {
+            return '-';
+        } else if (isNaN(this.amonia)) {
+            return this.amonia.trim();
+        } else {
+            return this.amonia.toFixed(2).replace('.',',');
+        }
+    }
+
+    getNitrito() {
+        if(this.nitrito == null) {
+            return '-';
+        } else if (isNaN(this.nitrito)) {
+            return this.nitrito.trim();
+        } else {
+            return this.nitrito.toFixed(2).replace('.',',');
+        }
+    }
+
+    getNitrato() {
+        if(this.nitrato == null) {
+            return '-';
+        } else if (isNaN(this.nitrato)) {
+            return this.nitrato.trim();
+        } else {
+            return this.nitrato.toFixed(2).replace('.',',');
+        }
+    }
+
+    getFosfato() {
+        if(this.fosfato == null) {
+            return '-';
+        } else if (isNaN(this.fosfato)) {
+            return this.fosfato.trim();
+        } else {
+            return this.fosfato.toFixed(2).replace('.',',');
+        }
+    }
+
+    getColiformes() {
+        if(this.coliformes == null) {
+            return '-';
+        } else if (isNaN(this.coliformes)) {
+            return this.coliformes.trim();
+        } else {
+            return this.coliformes.toFixed(0).replace('.',',');
+        }
+    }
+
+    getEColi() {
+        if(this.eColi == null) {
+            return '-';
+        } else if (isNaN(this.eColi)) {
+            return this.eColi.trim();
+        } else {
+            return this.eColi.toFixed(0).replace('.',',');
+        }
+    }
+
 }

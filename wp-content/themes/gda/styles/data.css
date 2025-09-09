@@ -9,7 +9,8 @@
     width: 20vw;
     max-width: 768px;
     height: 100vh;
-    transition: all .2s;
+    transition-duration: .2s;
+    transition-property: none;
 
     display: flex;
     flex-direction: column;
@@ -31,6 +32,7 @@
 
 #data-section.data-shown {
     width: 60vw;
+    transition-property: width, height;
 }
 
 #data-section.data-shown > * {
@@ -84,7 +86,7 @@
 
 }
 
-#data-section.data-shown #data-mutable-container div {
+#data-section.data-shown #data-mutable-container .data-table-container {
     display: flex;
     justify-content: space-around;
     width: 100%;
@@ -134,7 +136,6 @@
     font-weight: bold;
     background-color: #282828;
     color: #F5F5F5;
-    font-style: italic;
 }
 
 .data-table .data-table-row {
@@ -149,11 +150,16 @@
 .data-table-label {
     text-align: left;
     font-weight: bold;
-    width: 45%;
+    width: 42%;
 }
 
 .data-table-standard {
     text-align: center;
+}
+
+.data-table-standard span {
+    margin-top: 2px;
+    font-weight: 300;
 }
 
 .data-table-measurement {
@@ -174,9 +180,34 @@ td.data-table-measurement {
     background-color: #FFCCCC;
 }
 
-
-
 .data-table.visible {
     display: table;
+}
+
+#data-dot-container {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: space-between;
+    margin: 6px 0;
+    height: 16px;
+}
+
+#data-dot-container .dot {
+    color: #C9C9C9;
+    padding: 4px;
+    margin: 0 3px;
+    font-size: 12px;
+    cursor: pointer;
+    transition-duration: .2s;
+    transition-property: color, font-size;
+}
+#data-dot-container .dot:hover {
+    color: #A9A9A9;
+}
+
+#data-dot-container .dot.selected {
+    color: #A9A9A9;
+    font-size: 16px;
 }
 

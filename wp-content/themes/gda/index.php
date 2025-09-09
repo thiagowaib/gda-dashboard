@@ -14,6 +14,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
 
 
     <link rel="stylesheet" href="<?= get_stylesheet_directory_uri(); ?>/styles/reset.css"/>
@@ -22,22 +23,30 @@
     <link rel="stylesheet" href="<?= get_stylesheet_directory_uri(); ?>/styles/map.css"/>
     <link rel="stylesheet" href="<?= get_stylesheet_directory_uri(); ?>/styles/data.css"/>
     
+          
     <script src="<?= get_template_directory_uri(); ?>/script.js" type="module" defer></script>
     
     <title><?= bloginfo('description'); ?></title>
 </head>
 <body>
     <section id="map-section">
-        <header>
-            <div class="major-mono">
+        <header class="major-mono">
+            <div>
                 <h2>projeto</h2>
                 <h1>cuidadores das Águas</h1>
             </div>
         </header>
 
         <div id="map"></div>
-        <footer>
 
+        <footer class="montserrat">
+            <a href="https://uftm.edu.br/campusiturama" target="_blank">
+                UFTM | Campus Iturama
+            </a>
+            <a href="https://github.com/thiagowaib" target="_blank">
+                <i class="devicon-github-original" alt="@"></i>
+                thiagowaib
+            </a>
         </footer>
     </section>
 
@@ -51,14 +60,12 @@
         <h1 id="data-point-description"></h1>
         <div id="data-mutable-container">
             <h2 id="data-date-description"></h2>
-            <div>
+            <div class="data-table-container">
                 <a id="data-previous">&#10094; Anterior</a>
                 <div id="data-table-anchor"></div>
                 <a id="data-next">Próximo &#10095;</a>
             </div>
-            <div class="data-dot-container">
-            <!-- <span class="carrousel-dot"></span> -->
-            </div>
+            <div id="data-dot-container"></div>
         </div>
     </section>
 

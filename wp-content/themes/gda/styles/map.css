@@ -5,12 +5,14 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
-    transition: all .2s;
+    transition-duration: .2s;
+    transition-property: none;
 }
 
 #map-section.data-shown{
     width: 40vw;
     min-width: calc(100vw - 768px);
+    transition-property: width, height;
 }
 
 #map {
@@ -35,3 +37,4 @@
 .leaflet-control-layers-base label span {
     cursor: pointer;
 }
+

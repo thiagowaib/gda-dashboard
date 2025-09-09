@@ -5,3 +5,7 @@
 .major-mono {
   font-family: "Major Mono Display", monospace;
 }
+
+i {
+  font-style: italic;
+}

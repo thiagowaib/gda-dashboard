@@ -18,9 +18,5 @@ medidas.forEach(m => {
     )
     marker.on('click', () => {
         displayDataTables(m)
-        // setTimeout(() => {
-            // map.getMap().invalidateSize();
-            map.getMap().panTo([m.latitude, m.longitude])
-        // }, 200);
     });
 })

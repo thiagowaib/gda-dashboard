@@ -8,6 +8,7 @@ const dataDateDesc  = document.getElementById('data-date-description');
 const btnCloseDataSection = document.getElementById('btn-close-data-section');
 const btnDataPrevious     = document.getElementById('data-previous');
 const btnDataNext         = document.getElementById('data-next');
+const dataDotAnchor     = document.getElementById('data-dot-container');
 
 /**
  * @param {Medida} medida 
@@ -25,15 +26,15 @@ function showData(medida) {
 }
 
 function hideData() {
-    mapSection.classList.remove("data-shown");
     dataSection.classList.remove("data-shown");
-
+    mapSection.classList.remove("data-shown");
     dataPointDesc.innerHTML = '';
     dataDateDesc.innerHTML  = '';
     dataAnchor.innerHTML = '';
+    dataDotAnchor.innerHTML = '';
 }
 
-function cycleDataPrevious() {
+function getActualIndex() {
     const tables = dataAnchor.children;
     let actualIndex;
     for(let i = 0; i < tables.length; i++) {
@@ -42,41 +43,56 @@ function cycleDataPrevious() {
             break;
         }
     }
+    return actualIndex;
+}
 
-    if(actualIndex >= (tables.length - 1)) {
-        return;
-    }
+function cycleDataPrevious() {
+    const tables = dataAnchor.children;
+    const actualIndex = getActualIndex();
+    if(actualIndex == undefined || actualIndex >= tables.length - 1) return;
 
+    const dots   = dataDotAnchor.children;
     for(let i = 0; i < tables.length; i++) {
         if(i === (actualIndex + 1)) {
             tables[i].classList.add("visible");
             dataDateDesc.innerHTML = "Medição feita em " + tables[i].getAttribute("date");
+            dots[i].classList.add("selected");
         } else {
             tables[i].classList.remove("visible");
+            dots[i].classList.remove("selected");
         }
     }
 }
 
 function cycleDataNext() {
     const tables = dataAnchor.children;
-    let actualIndex;
-    for(let i = 0; i < tables.length; i++) {
-        if(tables[i].classList.contains("visible")) {
-            actualIndex = i;
-            break;
-        }
-    }
+    const actualIndex = getActualIndex();
+    if(actualIndex == undefined || actualIndex <= 0) return;
 
-    if(actualIndex <= 0) {
-        return;
-    }
-
+    const dots   = dataDotAnchor.children;
     for(let i = 0; i < tables.length; i++) {
         if(i === (actualIndex - 1)) {
             tables[i].classList.add("visible");
             dataDateDesc.innerHTML = "Medição feita em " + tables[i].getAttribute("date");
+            dots[i].classList.add("selected");
         } else {
             tables[i].classList.remove("visible");
+            dots[i].classList.remove("selected");
+        }
+    }
+}
+
+function cycleDataToIndex(index) {
+    const tables = dataAnchor.children;
+    const dots   = dataDotAnchor.children;
+    for(let i = 0; i < tables.length; i++) {
+        if(i === (index)) {
+            tables[i].classList.add("visible");
+            dataDateDesc.innerHTML = "Medição feita em " + tables[i].getAttribute("date");
+            dots[i].classList.add("selected");
+        } else {
+            tables[i].classList.remove("visible");
+            dots[i].classList.remove("selected");
         }
     }
 }
@@ -108,9 +124,10 @@ export function initBasicDOM() {
 /**
  * @param {{latitude: string;longitude: string;ponto: string;medidas: Medida[]}} m 
  */
-export function displayDataTables(m) {
+export function displayDataTables(m, map) {
     const anchor = document.getElementById('data-table-anchor');
     anchor.innerHTML = '';
+    dataDotAnchor.innerHTML = '';
     
     toggleData(m.medidas[0]);
     if(!isDataShown()) return; 
@@ -123,7 +140,24 @@ export function displayDataTables(m) {
         }
         table.setAttribute("date", medida.data);
         anchor.appendChild(table);
+
+        createDot(i);
     });
+}
+
+/**
+ * Instantiates new dot below data-table container
+ * @param {number} index 
+ */
+function createDot(index) {
+    const dot = document.createElement('span');
+    dot.classList.add('dot');
+    if(index === 0) {
+        dot.classList.add('selected');
+    }
+    dot.innerHTML = '&#9679;';
+    dot.addEventListener('click', () => {console.log(index); cycleDataToIndex(index)});
+    dataDotAnchor.appendChild(dot);
 }
 
 /**
@@ -133,9 +167,9 @@ export function displayDataTables(m) {
 function medidaAsHTMLTable(m) {
         const headers = `
             <tr class="table-header-row">
-                <th class="data-table-label">Parâmetro</th>
-                <th class="data-table-standard">Padrão Legal</th>
-                <th class="data-table-measurement">Valor</th>
+                <th class="data-table-label"><i>Parâmetro</i></th>
+                <th class="data-table-standard"><i>Padrão</i> Legal</th>
+                <th class="data-table-measurement"><i>Valor</i></th>
             </tr>
         `
 
@@ -177,7 +211,7 @@ function medidaAsHTMLTable(m) {
             </tr>
             <tr class="data-table-row">
                 <td class="data-table-label">Amônia</td>
-                <td class="data-table-standard">≤ 3,7 mg/L N (pH ≤ 7,5)</td>
+                <td class="data-table-standard">≤ 3,7 mg/L N<br/><span>(pH ≤ 7,5)</span></td>
                 <td class="data-table-measurement ${m.getClassificationAmonia()}">${m.getAmonia()}</td>
             </tr>
             <tr class="data-table-row">
@@ -197,12 +231,12 @@ function medidaAsHTMLTable(m) {
             </tr>
             <tr class="data-table-row">
                 <td class="data-table-label">UFC coliformes totais / 100ml</td>
-                <td class="data-table-standard">≤ 1000 UFC / 100ml água</td>
+                <td class="data-table-standard">≤ 1000 UFC /<br/><span>100ml água</span></td>
                 <td class="data-table-measurement ${m.getClassificationColiformes()}">${m.getColiformes()}</td>
             </tr>
             <tr class="data-table-row">
-                <td class="data-table-label">UFC E. coli / 100ml</td>
-                <td class="data-table-standard">≤ 2000 UFC / 100ml água</td>
+                <td class="data-table-label">UFC <i>E. coli</i> / 100ml</td>
+                <td class="data-table-standard">≤ 2000 UFC /<br/><span>100ml água</span></td>
                 <td class="data-table-measurement ${m.getClassificationEColi()}">${m.getEColi()}</td>
             </tr>
         `

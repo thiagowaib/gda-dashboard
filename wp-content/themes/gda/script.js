@@ -6,7 +6,7 @@ const map = new Map();
 
 map.initLayers();
 
-initBasicDOM();
+initBasicDOM(map);
 
 const medidas = Medida.normalizeData(Medida.getMedidasFromDOM());
 
@@ -17,6 +17,24 @@ medidas.forEach(m => {
         `<b>${m.ponto}</b>`
     )
     marker.on('click', () => {
-        displayDataTables(m)
+        const mapDOMObject = document.getElementById('map');
+
+        const heightBefore = mapDOMObject.offsetHeight;
+        const widthBefore  = mapDOMObject.offsetWidth;
+        displayDataTables(m, map);
+
+        setTimeout(() => {
+            const heightAfter = mapDOMObject.offsetHeight;
+            const widthAfter  = mapDOMObject.offsetWidth;
+            if(heightBefore !== heightAfter || widthBefore !== widthAfter) {
+                map.getMap().setView([m.latitude, m.longitude], map.getMap().getZoom(), {animate: true, duration: .5});
+                setTimeout(() => { 
+                    map.getMap().invalidateSize();
+                    map.getMap().setView([m.latitude, m.longitude], map.getMap().getZoom(), {animate: true});
+                }, 151); // If Transition has occured, awaits its end 
+            } else {
+                map.getMap().setView([m.latitude, m.longitude], map.getMap().getZoom(), {animate: true});
+            }
+        }, 50); // Time to calculate any changes to Map size due to CSS Transition
     });
 })

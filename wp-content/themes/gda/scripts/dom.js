@@ -1,4 +1,5 @@
 import { Medida } from "./medida";
+import { Map } from "./map";
 
 const mapSection    = document.getElementById('map-section');
 const dataSection   = document.getElementById('data-section');
@@ -25,13 +26,17 @@ function showData(medida) {
     dataDateDesc.innerHTML  = "Medição feita em " + medida.data;
 }
 
-function hideData() {
+/**
+ * @param {Map} map 
+ */
+function hideData(map) {
     dataSection.classList.remove("data-shown");
     mapSection.classList.remove("data-shown");
     dataPointDesc.innerHTML = '';
     dataDateDesc.innerHTML  = '';
     dataAnchor.innerHTML = '';
     dataDotAnchor.innerHTML = '';
+    map.getMap().invalidateSize();
 }
 
 function getActualIndex() {
@@ -99,13 +104,14 @@ function cycleDataToIndex(index) {
 
 /**
  * @param {Medida} medida 
+ * @param {Map} map
  */
-export function toggleData(medida) {
+export function toggleData(medida, map) {
     const shownPoint = dataPointDesc.innerHTML;
     if(shownPoint === '') {
         showData(medida);
     } else if (shownPoint === medida.ponto) {
-        hideData();
+        hideData(map);
     } else if (shownPoint !== medida.ponto) {
         showData(medida);
     }
@@ -115,8 +121,11 @@ export function isDataShown() {
     return dataSection.classList.contains("data-shown");
 }
 
-export function initBasicDOM() {
-    btnCloseDataSection.addEventListener('click', hideData);
+/**
+ * @param {Map} map 
+ */
+export function initBasicDOM(map) {
+    btnCloseDataSection.addEventListener('click', () => hideData (map));
     btnDataPrevious.addEventListener('click', cycleDataPrevious);
     btnDataNext.addEventListener('click', cycleDataNext);
 }
@@ -129,7 +138,7 @@ export function displayDataTables(m, map) {
     anchor.innerHTML = '';
     dataDotAnchor.innerHTML = '';
     
-    toggleData(m.medidas[0]);
+    toggleData(m.medidas[0], map);
     if(!isDataShown()) return; 
 
     m.medidas.forEach((medida, i) => {

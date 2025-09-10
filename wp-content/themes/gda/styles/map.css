@@ -18,12 +18,14 @@
 
 #map-section.data-shown{
     width: 40vw;
+    min-width: calc(100vw - 900px);
     transition-property: width, height;
 }
 
 @media screen and (max-width: 900px) {
     #map-section.data-shown{
         width: 100vw;
+        min-width: 100vw;
         height: 40vh;
     }
 }

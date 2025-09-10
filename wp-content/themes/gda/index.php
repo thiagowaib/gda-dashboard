@@ -36,6 +36,11 @@
                 <h1>cuidadores das Águas</h1>
             </div>
         </header>
+        <nav class="montserrat">
+            <a href="https://uftm.edu.br/campusiturama" target="_blank">
+                UFTM | Iturama
+            </a>
+        </nav>
 
         <div id="map"></div>
 
@@ -61,9 +66,9 @@
         <div id="data-mutable-container">
             <h2 id="data-date-description"></h2>
             <div class="data-table-container">
-                <a id="data-previous">&#10094; Anterior</a>
+                <a id="data-previous">&#10094;</a>
                 <div id="data-table-anchor"></div>
-                <a id="data-next">Próximo &#10095;</a>
+                <a id="data-next">&#10095;</a>
             </div>
             <div id="data-dot-container"></div>
         </div>

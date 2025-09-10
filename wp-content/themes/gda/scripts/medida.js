@@ -133,7 +133,7 @@ export class Medida {
      * @return {'valid'|'invalid'|''} 
      */
     #getClassificationNumberLimit(number, lowerLimit = null, upperLimit = null) {
-        if(number == null ||  isNaN(number)) {
+        if(number == null ||  !(typeof number === 'number')) {
             return '';
         }
 
@@ -219,8 +219,8 @@ export class Medida {
     getTurbidez() {
         if(this.turbidez == null) {
             return '-';
-        } else if (isNaN(this.turbidez)) {
-            return this.turbidez.trim();
+        } else if (!(typeof this.turbidez === 'number')) {
+            return this.turbidez.trim().length > 0 ? this.turbidez.trim() : '-';
         } else {
             return this.turbidez;
         }
@@ -229,8 +229,8 @@ export class Medida {
     getPh() {
         if(this.ph == null) {
             return '-';
-        } else if (isNaN(this.ph)) {
-            return this.ph.trim();
+        } else if (!(typeof this.ph === 'number')) {
+            return this.ph.trim().length > 0 ? this.ph.trim() : '-';
         } else {
             return this.ph.toFixed(1).replace('.',',');
         }
@@ -239,8 +239,8 @@ export class Medida {
     getOxigenio() {
         if(this.oxigenio == null) {
             return '-';
-        } else if (isNaN(this.oxigenio)) {
-            return this.oxigenio.trim();
+        } else if (!(typeof this.oxigenio === 'number')) {
+            return this.oxigenio.trim().length > 0 ? this.oxigenio.trim() : '-';
         } else {
             return this.oxigenio.toFixed(2).replace('.',',');
         }
@@ -249,8 +249,8 @@ export class Medida {
     getAmonia() {
         if(this.amonia == null) {
             return '-';
-        } else if (isNaN(this.amonia)) {
-            return this.amonia.trim();
+        } else if (!(typeof this.amonia === 'number')) {
+            return this.amonia.trim().length > 0 ? this.amonia.trim() : '-';
         } else {
             return this.amonia.toFixed(2).replace('.',',');
         }
@@ -259,8 +259,8 @@ export class Medida {
     getNitrito() {
         if(this.nitrito == null) {
             return '-';
-        } else if (isNaN(this.nitrito)) {
-            return this.nitrito.trim();
+        } else if (!(typeof this.nitrito === 'number')) {
+            return this.nitrito.trim().length > 0 ? this.nitrito.trim() : '-';
         } else {
             return this.nitrito.toFixed(2).replace('.',',');
         }
@@ -269,8 +269,8 @@ export class Medida {
     getNitrato() {
         if(this.nitrato == null) {
             return '-';
-        } else if (isNaN(this.nitrato)) {
-            return this.nitrato.trim();
+        } else if (!(typeof this.nitrato === 'number')) {
+            return this.nitrato.trim().length > 0 ? this.nitrato.trim() : '-';
         } else {
             return this.nitrato.toFixed(2).replace('.',',');
         }
@@ -279,8 +279,8 @@ export class Medida {
     getFosfato() {
         if(this.fosfato == null) {
             return '-';
-        } else if (isNaN(this.fosfato)) {
-            return this.fosfato.trim();
+        } else if (!(typeof this.fosfato === 'number')) {
+            return this.fosfato.trim().length > 0 ? this.fosfato.trim() : '-';
         } else {
             return this.fosfato.toFixed(2).replace('.',',');
         }
@@ -289,8 +289,8 @@ export class Medida {
     getColiformes() {
         if(this.coliformes == null) {
             return '-';
-        } else if (isNaN(this.coliformes)) {
-            return this.coliformes.trim();
+        } else if (!(typeof this.coliformes === 'number')) {
+            return this.coliformes.trim().length > 0 ? this.coliformes.trim() : '-';
         } else {
             return this.coliformes.toFixed(0).replace('.',',');
         }
@@ -299,8 +299,8 @@ export class Medida {
     getEColi() {
         if(this.eColi == null) {
             return '-';
-        } else if (isNaN(this.eColi)) {
-            return this.eColi.trim();
+        } else if (!(typeof this.eColi === 'number')) {
+            return this.eColi.trim().length > 0 ? this.eColi.trim() : '-';
         } else {
             return this.eColi.toFixed(0).replace('.',',');
         }

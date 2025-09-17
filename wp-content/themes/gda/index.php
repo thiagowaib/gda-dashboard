@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="<?= get_stylesheet_directory_uri(); ?>/style.css"/>
     <link rel="stylesheet" href="<?= get_stylesheet_directory_uri(); ?>/styles/map.css"/>
     <link rel="stylesheet" href="<?= get_stylesheet_directory_uri(); ?>/styles/data.css"/>
+    <link rel="stylesheet" href="<?= get_stylesheet_directory_uri(); ?>/styles/modal.css"/>
     
           
     <script src="<?= get_template_directory_uri(); ?>/script.js" type="module" defer></script>
@@ -40,6 +41,9 @@
             <a href="https://uftm.edu.br/campusiturama" target="_blank">
                 ICAEBI - UFTM Iturama
             </a>
+            <a class="modal-about-open">
+                Saiba Mais
+            </a>
         </nav>
         <fieldset id="panning-menu">
             <button class="montserrat" id="btn-pan-to-iturama">Iturama</button>
@@ -53,10 +57,10 @@
             <a href="https://uftm.edu.br/campusiturama" target="_blank">
                 ICAEBI - UFTM Campus Iturama
             </a>
-            <a href="https://www.uftm.edu.br/icbn/docentes" target="_blank">
-                Profº Responsável: Armando Castello Branco Júnior
+            <a class="modal-about-open">
+                Saiba Mais
             </a>
-            <a href="https://github.com/thiagowaib" target="_blank">
+            <a href="https://github.com/thiagowaib/gda-dashboard" target="_blank">
                 <i class="devicon-github-original" alt="@"></i>
                 thiagowaib
             </a>
@@ -80,6 +84,30 @@
             </div>
             <div id="data-dot-container"></div>
         </div>
+    </section>
+
+    <section id="modal-about">
+        <div id="modal-about-background" class="montserrat">
+            <button id="modal-about-close">X</button>
+            <div class="flex-container">
+                <h1 class="major-mono">sobre o projeto</h1>
+                <div>
+                    <p>
+                        O Cuidadores das Águas é um projeto de extensão da UFTM – Campus Iturama, 
+                        que busca promover educação ambiental e conscientização sobre a 
+                        preservação dos recursos hídricos. 
+                    </p>
+                    <p>
+                        A iniciativa envolve atividades de 
+                        monitoramento da qualidade da água, produção de materiais educativos 
+                        e ações junto à comunidade, incentivando a participação cidadã no 
+                        cuidado com o meio ambiente.
+                    </p>
+                </div>
+                <span><b>Professor Responsável:</b> Armando Castello Branco Júnior</span>
+            </div>
+        </div>
+        <div id="modal-about-backdrop"></div>
     </section>
 
     

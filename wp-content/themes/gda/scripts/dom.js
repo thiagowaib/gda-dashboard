@@ -13,6 +13,19 @@ const dataDotAnchor     = document.getElementById('data-dot-container');
 const btnPanToIturama     = document.getElementById('btn-pan-to-iturama');
 const btnPanToAlexandrita = document.getElementById('btn-pan-to-alexandrita');
 
+const modalAbout = document.getElementById("modal-about");
+const modalAboutBackdrop = document.getElementById("modal-about-backdrop");
+const modalAboutClose = document.getElementById("modal-about-close");
+const modalAboutOpen = document.getElementsByClassName("modal-about-open");
+
+function openModal() {
+    modalAbout.classList.add("shown");
+}
+
+function closeModal() {
+    modalAbout.classList.remove("shown");
+}
+
 /**
  * @param {Medida} medida 
  */
@@ -155,6 +168,11 @@ export function initBasicDOM(map) {
     btnDataNext.addEventListener('click', cycleDataNext);
     btnPanToIturama.addEventListener('click', () => panToIturama(map));
     btnPanToAlexandrita.addEventListener('click', () => panToAlexandrita(map));
+    for(let i = 0; i < modalAboutOpen.length; i++) {
+        modalAboutOpen[i].addEventListener('click', openModal);
+    }
+    modalAboutBackdrop.addEventListener('click', closeModal);
+    modalAboutClose.addEventListener('click', closeModal);
 }
 
 /**

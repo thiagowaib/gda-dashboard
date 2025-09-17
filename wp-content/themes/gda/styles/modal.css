@@ -1,0 +1,86 @@
+#modal-about {
+    display: none;
+}
+
+#modal-about.shown {
+    display: flex;
+    position: absolute;
+    z-index: 500;
+    width: 100vw;
+    height: 100vh;
+}
+
+#modal-about-backdrop {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.6);
+    position: absolute;
+}
+
+#modal-about-background {
+    z-index: 501;
+    background-color: #F5F5F5;
+    box-shadow: 0 0 24px rgba(0,0,0,.4);
+    border-radius: 10px;
+    width: 50vw;
+    height: 50vh;
+    padding: 24px;
+    display: flex;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+@media screen and (max-width: 900px) {
+    #modal-about-background {
+        width: 70vw;
+        height: 70vh;
+    }
+}
+
+#modal-about-background .flex-container {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+#modal-about-close {
+    background-color: transparent;
+    color: #A9A9A9;
+    outline: none;
+    border: none;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 4px;
+    transition-duration: .2s;
+    transition-property: color, scale;
+    align-self: flex-end;
+}
+
+#modal-about-close:hover {
+    color: #696969;
+    transform: scale(1.2);
+}
+
+#modal-about-background h1 {
+    font-weight: 600;
+    font-size: 32px;
+    font-style: italic;
+}
+
+#modal-about-background p {
+    margin: 8px 0;
+    font-size: 16px;
+    line-height: 18px;
+
+}
+
+#modal-about-background span {
+    padding-top: 36px;
+    font-size: 14px;
+    font-style: italic;
+}

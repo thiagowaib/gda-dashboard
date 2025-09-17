@@ -31,7 +31,7 @@ medidas.forEach(m => {
                 setTimeout(() => { 
                     map.getMap().invalidateSize();
                     map.getMap().setView([m.latitude, m.longitude], map.getMap().getZoom(), {animate: true});
-                }, 151); // If Transition has occured, awaits its end 
+                }, 200); // If Transition has occured, awaits its end 
             } else {
                 map.getMap().setView([m.latitude, m.longitude], map.getMap().getZoom(), {animate: true});
             }

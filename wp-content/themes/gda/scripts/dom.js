@@ -17,12 +17,7 @@ const dataDotAnchor     = document.getElementById('data-dot-container');
 function showData(medida) {
     mapSection.classList.add("data-shown");
     dataSection.classList.add("data-shown");
-
-    if(medida.ponto.toUpperCase().includes("PONTO")) {
-        dataPointDesc.innerHTML = medida.ponto;
-    } else {
-        dataPointDesc.innerHTML = "Ponto de Coleta " + medida.ponto.toUpperCase();
-    }
+    dataPointDesc.innerHTML = medida.ponto;
     dataDateDesc.innerHTML  = "Medição feita em " + medida.data;
 }
 

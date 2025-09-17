@@ -1,5 +1,5 @@
-import { Medida } from "./medida";
-import { Map } from "./map";
+import { Medida } from "./medida.js";
+import { Map } from "./map.js";
 
 const mapSection    = document.getElementById('map-section');
 const dataSection   = document.getElementById('data-section');

@@ -33,6 +33,7 @@
 #map {
     height:  100%;
     width:   100%;
+    z-index: 1;
 }
 
 #map .leaflet-tile-pane{
@@ -51,5 +52,38 @@
 .leaflet-control-layers-selector,
 .leaflet-control-layers-base label span {
     cursor: pointer;
+}
+
+#panning-menu {
+    position: absolute;
+    z-index: 50;
+    top: 0;
+    margin-top: 10vh;
+    width: 100%;
+    text-align: center;
+}
+
+#panning-menu legend {
+
+}
+
+#panning-menu button {
+    outline: none;
+    background-color: rgba(200,200,200,.8);
+    border: 1px solid #F5F5F5;
+    border-radius: 10px;
+    color: #FFF;
+    cursor: pointer;
+    transition-duration: .2s;
+    transition-property: background-color;
+    padding: 4px 16px;
+    margin: 0 6px;
+    font-weight: 600;
+    font-style: italic;
+}
+
+#panning-menu button:hover,
+#panning-menu button:active {
+    background-color: rgba(140,140,140,.8);
 }
 

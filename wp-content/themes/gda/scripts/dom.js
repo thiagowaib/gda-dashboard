@@ -10,6 +10,8 @@ const btnCloseDataSection = document.getElementById('btn-close-data-section');
 const btnDataPrevious     = document.getElementById('data-previous');
 const btnDataNext         = document.getElementById('data-next');
 const dataDotAnchor     = document.getElementById('data-dot-container');
+const btnPanToIturama     = document.getElementById('btn-pan-to-iturama');
+const btnPanToAlexandrita = document.getElementById('btn-pan-to-alexandrita');
 
 /**
  * @param {Medida} medida 
@@ -118,11 +120,41 @@ export function isDataShown() {
 
 /**
  * @param {Map} map 
+ * @param {Boolean} animate
+ */
+function panToIturama(map, animate = true) {
+    map
+    .getMap()
+    .setView(
+        [-19.72806, -50.19556],
+        map.getMap().getZoom(), 
+        {animate}
+    );
+}
+
+/**
+ * @param {Map} map 
+ * @param {Boolean} animate
+ */
+function panToAlexandrita(map, animate = true) {
+    map
+    .getMap()
+    .setView(
+        [-19.692616, -50.454874],
+        map.getMap().getZoom(), 
+        {animate}
+    );
+}
+
+/**
+ * @param {Map} map 
  */
 export function initBasicDOM(map) {
     btnCloseDataSection.addEventListener('click', () => hideData (map));
     btnDataPrevious.addEventListener('click', cycleDataPrevious);
     btnDataNext.addEventListener('click', cycleDataNext);
+    btnPanToIturama.addEventListener('click', () => panToIturama(map));
+    btnPanToAlexandrita.addEventListener('click', () => panToAlexandrita(map));
 }
 
 /**

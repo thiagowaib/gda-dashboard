@@ -32,21 +32,29 @@
     <section id="map-section">
         <header class="major-mono">
             <div>
-                <h2>projeto</h2>
+                <h2>projeto de extensão</h2>
                 <h1>cuidadores das Águas</h1>
             </div>
         </header>
         <nav class="montserrat">
             <a href="https://uftm.edu.br/campusiturama" target="_blank">
-                UFTM | Iturama
+                ICAEBI - UFTM Iturama
             </a>
         </nav>
+        <fieldset id="panning-menu">
+            <button class="montserrat" id="btn-pan-to-iturama">Iturama</button>
+            <button class="montserrat" id="btn-pan-to-alexandrita">Alexandrita</button>
+        </fieldset>
 
         <div id="map"></div>
 
+
         <footer class="montserrat">
             <a href="https://uftm.edu.br/campusiturama" target="_blank">
-                UFTM | Campus Iturama
+                ICAEBI - UFTM Campus Iturama
+            </a>
+            <a href="https://www.uftm.edu.br/icbn/docentes" target="_blank">
+                Profº Responsável: Armando Castello Branco Júnior
             </a>
             <a href="https://github.com/thiagowaib" target="_blank">
                 <i class="devicon-github-original" alt="@"></i>

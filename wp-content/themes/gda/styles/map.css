@@ -57,14 +57,10 @@
 #panning-menu {
     position: absolute;
     z-index: 50;
-    top: 0;
-    margin-top: 10vh;
-    width: 100%;
+    width: 60%;
+    flex-wrap: nowrap;
     text-align: center;
-}
-
-#panning-menu legend {
-
+    margin: 10vh 20% 0 20%;
 }
 
 #panning-menu button {

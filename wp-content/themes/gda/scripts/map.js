@@ -2,12 +2,36 @@ export class Map {
     constructor() {
         this.map = L.map('map', {
             center: [-19.72806, -50.19556],
-            zoom: 15
+            zoom: 14
         });
-        this.markerIcon = new L.Icon({
+        this.redIcon = new L.Icon({
             iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
             shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-            iconSize: [25, 41],
+            iconSize: [21, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowSize: [41, 41]
+        });
+        this.blueIcon = new L.Icon({
+            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
+            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+            iconSize: [21, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowSize: [41, 41]
+        });
+        this.orangeIcon = new L.Icon({
+            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-orange.png',
+            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+            iconSize: [21, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowSize: [41, 41]
+        });
+        this.violetIcon = new L.Icon({
+            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-violet.png',
+            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+            iconSize: [21, 41],
             iconAnchor: [12, 41],
             popupAnchor: [1, -34],
             shadowSize: [41, 41]
@@ -52,9 +76,24 @@ export class Map {
      * @return {marker} 
      */
     addMarker(latitude, longitude, description) {
-        const marker = L.marker([latitude, longitude], {icon: this.markerIcon});
+        const marker = L.marker([latitude, longitude], {icon: this.getIcon(description)});
         this.map.addLayer(marker);
         marker.bindPopup(`<b>${description}</b>`);
         return marker;
+    }
+
+    /**
+     * @param {string} description
+     */
+    getIcon(description) {
+        if(description.toUpperCase().trim().includes("QUATI")) {
+            return this.redIcon;
+        } else if (description.toUpperCase().trim().includes("ROSA")) {
+            return this.violetIcon;
+        } else if (description.toUpperCase().trim().includes("ALTO")) {
+            return this.orangeIcon;
+        } else {
+            return this.blueIcon;
+        }
     }
 }

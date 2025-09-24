@@ -153,7 +153,7 @@ function panToAlexandrita(map, animate = true) {
     map
     .getMap()
     .setView(
-        [-19.692616, -50.454874],
+        [-19.698616, -50.454874],
         map.getMap().getZoom(), 
         {animate}
     );

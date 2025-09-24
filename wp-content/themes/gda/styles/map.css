@@ -63,6 +63,14 @@
     margin: 10vh 20% 0 20%;
 }
 
+@media screen and (max-width: 900px) {
+    #panning-menu {
+        width: 100%;
+        margin: 0 0 12px 0;
+        bottom: 0;
+    }
+}
+
 #panning-menu button {
     outline: none;
     background-color: rgba(200,200,200,.8);
@@ -76,6 +84,7 @@
     margin: 0 6px;
     font-weight: 600;
     font-style: italic;
+    margin-top: 4px;
 }
 
 #panning-menu button:hover,

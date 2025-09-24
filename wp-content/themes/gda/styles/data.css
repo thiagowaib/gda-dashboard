@@ -99,7 +99,8 @@
 
 @media screen and (max-width: 900px) {
     #data-section.data-shown #data-point-description {
-        margin-bottom: 24px;
+        margin-bottom: 12px;
+        padding-top: 12px;
     }
 }
 
